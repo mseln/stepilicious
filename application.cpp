@@ -30,26 +30,21 @@ void Application::run(){
 void Application::update(){
 	switch (*app_state) {
 		case MENU:
-			//std::cout << "in menuloop\n";
 			menuloop();
 			break;
 		
 		case IN_GAME:
-			//std::cout << "in gameloop\n";
 			gameloop();
 			break;
 		
 		case IN_GAME_MENU:
-			//std::cout << "in ingame menuloop\n";
 			if (pause_if_in_menu) gameloop();
 			ingame_menuloop();
 			break;
 	}
 }
 
-void Application::menuloop(){
-	//if(event_h->pollCh('a')) *game_state = IN_GAME;
-	
+void Application::menuloop(){	
 	menu.update(app_state, event_h, window);
 	menu.draw(window);
 	

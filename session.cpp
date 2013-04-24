@@ -12,10 +12,15 @@
 Session::Session(sf::RenderWindow * w, Event_Handler * e){
 	window = w;
 	event_h = e;
+	bkg_img.LoadFromFile("background.jpg");
 }
 
 void Session::update(){
 	event_h->update();
 }
 void Session::draw(){
+	sf::Sprite tmp_img(bkg_img);
+	window->Draw(tmp_img);
+	
+	step_matrix.draw(window);
 }

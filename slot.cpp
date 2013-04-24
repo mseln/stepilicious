@@ -12,36 +12,43 @@
 sf::Image	Slot::button_img;
 double		Slot::pitch;
 
-Slot::Slot(){
-	
-}
+
+Slot::Slot(){}
 
 //                    Static functions
 // ********************************************************
 
-void Slot::load_sprite(){
+bool Slot::init(){
 	if (!button_img.LoadFromFile("button.jpg")){
 		std::cerr << "Couldn't load button image!";
+		return false;
 	}
+	std::cerr << "Succesfully loaded image!\n";
+	return true;
 }
-void Slot::setPitch(double val){
+void Slot::set_pitch(double val){
 	pitch = val;
 }
 
 // ********************************************************
 
-void Slot::setColor(int slot, int r, int g, int b){
+void Slot::set_color(int slot, int r, int g, int b){
+	col[0] = r; col[1] = g; col[2] = b;
 }
-void Slot::switchState(int n){ 
+void Slot::set_pos(int x, int y) {
+	pos[0] = x; pos[1] = y;
+}
+
+void Slot::switch_state(int n){ 
 }
 void Slot::disable(int n){
 }
-
 void Slot::play(){
-	for(int i = 0; i < 4; i++){
-	}
 }
 
-void Slot::draw(int n, sf::RenderWindow * window){
-	
+void Slot::draw(sf::RenderWindow * window){
+	sf::Sprite tmp_img(button_img);
+	tmp_img.SetPosition(pos[0], pos[1]);
+	tmp_img.SetColor(sf::Color(col[0], col[1], col[2], 200));
+	window->Draw(tmp_img);
 }

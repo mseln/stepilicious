@@ -15,21 +15,22 @@
 class Slot{
 private:
 	int pos[2];
+	int col[3];
 	static sf::Image button_img;
 	static double pitch;
 	
 public:
 	Slot();
+	static bool init();
 	static void load_sprite();
-	static void setPitch(double val);
+	static void set_pitch(double val);
 	
-	void setColor(int slot, int r, int g, int b);
-	void switchState(int n);
+	void set_color(int slot, int r, int g, int b);
+	void set_pos(int x, int y);
+	
+	void switch_state(int n);
 	void disable(int n);
-	
 	void play();
 	
-	
-	void setPos(int x, int y) {pos[0] = x; pos[1] = y;}
-	void draw(int n, sf::RenderWindow * window);
+	void draw(sf::RenderWindow * window);
 };

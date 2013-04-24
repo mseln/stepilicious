@@ -9,7 +9,7 @@
 
 #include <SFML/Audio.hpp>
 
-class Sound{
+class Sound_Handler{
 private:
 	
 public:
