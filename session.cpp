@@ -22,5 +22,6 @@ void Session::draw(){
 	sf::Sprite tmp_img(bkg_img);
 	window->Draw(tmp_img);
 	
+	step_matrix.update();
 	step_matrix.draw(window);
 }

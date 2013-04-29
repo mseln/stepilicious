@@ -25,7 +25,7 @@ public:
 	static void load_sprite();
 	static void set_pitch(double val);
 	
-	void set_color(int slot, int r, int g, int b);
+	void set_color(int r, int g, int b);
 	void set_pos(int x, int y);
 	
 	void switch_state(int n);

@@ -32,7 +32,7 @@ void Slot::set_pitch(double val){
 
 // ********************************************************
 
-void Slot::set_color(int slot, int r, int g, int b){
+void Slot::set_color(int r, int g, int b){
 	col[0] = r; col[1] = g; col[2] = b;
 }
 void Slot::set_pos(int x, int y) {
