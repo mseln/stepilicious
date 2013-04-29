@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef _SLOT_H_
+#define _SLOT_H_
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -34,3 +37,5 @@ public:
 	
 	void draw(sf::RenderWindow * window);
 };
+
+#endif

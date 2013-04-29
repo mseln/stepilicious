@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef _SOUND_H_
+#define _SOUND_H_
+
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <string>
@@ -27,3 +30,5 @@ public:
 	void play(int n);
 	void pause(int n);
 };
+
+#endif

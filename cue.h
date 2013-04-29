@@ -7,21 +7,33 @@
  *
  */
 
+#ifndef _CUE_H_
+#define _CUE_H_
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <iostream>
 
-#define LENGTH 4
+#define LENGTH 16
 
 class Cue{
 private:
 	int pos;
 	int bpm;
 	
+	static sf::Image cue_img;
+	int img_pos[LENGTH][2];
+	int img_col[LENGTH][3];
+	
 	sf::Clock clock;
 public:
 	Cue();
 	
+	static bool init();
+	
 	bool update();
 	int get_pos();
+	void draw(sf::RenderWindow * window);
 };
+
+#endif

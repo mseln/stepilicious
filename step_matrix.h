@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef _STEP_MATRIX_H_
+#define _STEP_MATRIX_H_
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -14,7 +17,7 @@
 #include "sound.h"
 #include "cue.h"
 
-#define N_SLOTS 16
+#define N_SLOTS 64
 
 class Step_Matrix{
 private:
@@ -27,3 +30,5 @@ public:
 	void draw(sf::RenderWindow * window);
 	void update();
 };
+
+#endif
