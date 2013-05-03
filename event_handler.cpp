@@ -40,6 +40,7 @@ void Event_Handler::update(){
 		
 		else if (Event.Type == sf::Event::KeyPressed){
 			if (Event.Key.Code == sf::Key::Space)	sp_key.SPACE	= true;
+			if (Event.Key.Code == sf::Key::Back)	sp_key.BACK		= false;
 			if (Event.Key.Code == sf::Key::Escape)	sp_key.ESCAPE	= true;
 			if (Event.Key.Code == sf::Key::Up)		sp_key.UP		= true;
 			if (Event.Key.Code == sf::Key::Down)	sp_key.DOWN		= true;
@@ -50,6 +51,7 @@ void Event_Handler::update(){
 		}
 		else if (Event.Type == sf::Event::KeyReleased){
 			if (Event.Key.Code == sf::Key::Space)	sp_key.SPACE	= false;
+			if (Event.Key.Code == sf::Key::Back)	sp_key.BACK		= false;
 			if (Event.Key.Code == sf::Key::Escape)	sp_key.ESCAPE	= false;
 			if (Event.Key.Code == sf::Key::Up)		sp_key.UP		= false;
 			if (Event.Key.Code == sf::Key::Down)	sp_key.DOWN		= false;
@@ -67,7 +69,7 @@ void Event_Handler::update(){
 			if (Event.MouseButton.Button == sf::Mouse::Right)	m_key[1] = false;
 		}
 	}
-	
+
 	const sf::Input& Input = window->GetInput();
 	m_pos[0] = Input.GetMouseX();
 	m_pos[1] = Input.GetMouseY();
@@ -82,7 +84,8 @@ bool Event_Handler::pollSp(char c){
 		case 'r': return sp_key.RIGHT;
 		case 'u': return sp_key.UP;	
 		case 'd': return sp_key.DOWN;	
-	 
+		
+		case 'B': return sp_key.BACK;
 		case 'S': return sp_key.SPACE;
 		case 'L': return sp_key.LSHIFT;
 		case 'R': return sp_key.RSHIFT;
@@ -112,4 +115,9 @@ bool Event_Handler::any_ch(){
 	for (int i = 0; i < 128; i++) if(key[i]) pressed = true;
 	
 	return pressed;
+}
+
+char Event_Handler::get_ch(){
+	for (char c = ' '; c < '~'; c++) if(key_once[c]) return c;
+	return '\0';
 }

@@ -16,12 +16,11 @@ Session::Session(sf::RenderWindow * w, Event_Handler * e){
 }
 
 void Session::update(){
-	event_h->update();
+	step_matrix.update(event_h);
 }
 void Session::draw(){
 	sf::Sprite tmp_img(bkg_img);
 	window->Draw(tmp_img);
 	
-	step_matrix.update();
 	step_matrix.draw(window);
 }

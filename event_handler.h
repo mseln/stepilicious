@@ -14,7 +14,7 @@
 #define _EVENT_HANDLER_
 
 struct Special_Keys{
-	bool SPACE,
+	bool SPACE, BACK,
 	ESCAPE,
 	UP, DOWN, RIGHT, LEFT,
 	RSHIFT, LSHIFT;
@@ -45,6 +45,8 @@ public:
 	
 	bool pollMb(char c);
 	int  pollMp(char c);
+	
+	char get_ch();
 };
 
 #endif

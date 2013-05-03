@@ -9,16 +9,20 @@
 
 #include "slot.h"
 
-sf::Image	Slot::button_img;
-double		Slot::pitch;
+sf::Image		Slot::button_img;
+double			Slot::pitch;
+Sound_Handler * Slot::sound_list;
 
-
-Slot::Slot(){}
+Slot::Slot(){
+	active = false;
+}
 
 //                    Static functions
 // ********************************************************
 
-bool Slot::init(){
+bool Slot::init(Sound_Handler * s){
+	sound_list = s;
+	
 	if (!button_img.LoadFromFile("button.jpg")){
 		std::cerr << "Couldn't load button image!";
 		return false;
@@ -32,6 +36,10 @@ void Slot::set_pitch(double val){
 
 // ********************************************************
 
+bool Slot::is_active(){
+	return active;
+}
+
 void Slot::set_color(int r, int g, int b){
 	col[0] = r; col[1] = g; col[2] = b;
 }
@@ -39,11 +47,23 @@ void Slot::set_pos(int x, int y) {
 	pos[0] = x; pos[1] = y;
 }
 
-void Slot::switch_state(int n){ 
+void Slot::switch_state(){
+	active = !active;
+	if(active){
+		col[0] = 100;
+		col[1] = 100;
+		col[2] = 200;
+	}
+	else{
+		col[0] = 100;
+		col[1] = 100;
+		col[2] = 100;
+	}
 }
 void Slot::disable(int n){
 }
 void Slot::play(){
+	sound_list->play(0);
 }
 
 void Slot::draw(sf::RenderWindow * window){

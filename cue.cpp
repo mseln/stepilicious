@@ -14,6 +14,7 @@ sf::Image Cue::cue_img;
 Cue::Cue(){
 	clock.Reset();
 	bpm = 120;
+	pos = 0;
 	
 	for (int i = 0; i < LENGTH; i++){
 		img_col[i][0] = 100;
@@ -40,7 +41,7 @@ bool Cue::init(){
 // ********************************************************
 
 bool Cue::update(){
-	float min_ela = clock.GetElapsedTime() / 60;
+	float min_ela = clock.GetElapsedTime() / (60 / 4);
 	
 	if(min_ela * bpm > 1){
 		clock.Reset();

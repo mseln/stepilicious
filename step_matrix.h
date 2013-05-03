@@ -13,22 +13,29 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include "event_handler.h"
+#include "system_entries.h"
+
 #include "slot.h"
 #include "sound.h"
 #include "cue.h"
+
 
 #define N_SLOTS 64
 
 class Step_Matrix{
 private:
 	Slot slot[N_SLOTS];
-	Sound_Handler sound_h;
 	Cue cue;
+	
+	Text_Field path_to_dir_field;
+	
+	Sound_Handler sound_h;
 	
 public:
 	Step_Matrix();
 	void draw(sf::RenderWindow * window);
-	void update();
+	void update(Event_Handler * event_h);
 };
 
 #endif

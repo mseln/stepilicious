@@ -13,8 +13,10 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <string>
-#include <map>
+#include <vector>
 #include <cmath>
+#include <dirent.h>
+
 
 struct Sound_Holder {
 	std::string name;
@@ -24,8 +26,10 @@ struct Sound_Holder {
 class Sound_Handler{
 private:
 	Sound_Holder sound_buffer[32];
+	std::vector<std::string> f_name_in_path;
 	
 public:
+	void load_dir(std::string path);
 	bool load_sound(int n, std::string f_name);
 	void play(int n);
 	void pause(int n);
