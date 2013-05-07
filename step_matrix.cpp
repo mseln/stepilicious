@@ -35,8 +35,16 @@ void Step_Matrix::draw(sf::RenderWindow * window){
 }
 
 void Step_Matrix::update(Event_Handler * event_h){
-	path_to_dir_field.text_append(event_h->get_ch());
-	path_to_dir_field.text_remove(event_h->pollSp('B'));
+	if(path_to_dir_field.has_focus()){
+		path_to_dir_field.text_append(event_h->get_ch());
+		path_to_dir_field.text_remove(event_h->pollSp('B'));
+	}
+	if(path_to_dir_field.check(event_h->pollMp('x'), event_h->pollMp('y'), event_h->pollMb('l'))){
+		path_to_dir_field.activate();
+	}
+	if(Base_System_Entry::no_target(event_h->pollMp('x'), event_h->pollMp('y'), event_h->pollMb('l'))){ 
+		Base_System_Entry::deactivate_all();
+	}
 	
 	
 	if(event_h->poll_once_ch('q')) slot[0].switch_state();
