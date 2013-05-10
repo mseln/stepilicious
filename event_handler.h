@@ -46,6 +46,7 @@ public:
 	bool pollMb(char c);
 	int  pollMp(char c);
 	
+	char get_once_ch();
 	char get_ch();
 };
 

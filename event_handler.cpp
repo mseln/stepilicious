@@ -117,7 +117,12 @@ bool Event_Handler::any_ch(){
 	return pressed;
 }
 
-char Event_Handler::get_ch(){
+char Event_Handler::get_once_ch(){
 	for (char c = ' '; c < '~'; c++) if(key_once[c]) return c;
+	return '\0';
+}
+
+char Event_Handler::get_ch(){
+	for (char c = ' '; c < '~'; c++) if(key[c]) return c;
 	return '\0';
 }

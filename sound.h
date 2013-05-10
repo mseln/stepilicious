@@ -30,6 +30,8 @@ private:
 	
 public:
 	void load_dir(std::string path);
+	std::vector<std::string> get_file_names();
+	
 	bool load_sound(int n, std::string f_name);
 	void play(int n);
 	void pause(int n);

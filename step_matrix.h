@@ -29,8 +29,14 @@ private:
 	Cue cue;
 	
 	Text_Field path_to_dir_field;
+	Choice_Field file_list;	
 	
 	Sound_Handler sound_h;
+	
+	void update_text_fields(Event_Handler * event_h);
+	void update_choice_fields(Event_Handler * event_h);
+	void update_cue();
+	void update_slots(Event_Handler * event_h);
 	
 public:
 	Step_Matrix();

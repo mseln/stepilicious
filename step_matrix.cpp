@@ -15,13 +15,18 @@ Step_Matrix::Step_Matrix(){
 	Cue::init();
 		
 	for(int i = 0; i < N_SLOTS; i++){
-		slot[i].set_pos((i%16) * 70 + 50, (i / 16) * 70 + 100);
+		slot[i].set_pos((i % 16) * 70 + 50, (i / 16) * 70 + 100);
 		slot[i].set_color(100, 100, 100);
 	}
 	
 	path_to_dir_field.set_pos(20, 20);
 	path_to_dir_field.set_size(200, 20);
-	path_to_dir_field.set_col(100, 100, 100, 200);
+	
+	sound_h.load_dir("/Users/geopard/Dropbox/Geopard/Programmering/stepilicious/test_sounds");
+	
+	file_list.init(sound_h.get_file_names());
+	file_list.set_pos(50, 450);
+	file_list.set_size(200, 300);
 	
 	sound_h.load_sound(0, "kick 1.wav");
 }
@@ -32,9 +37,18 @@ void Step_Matrix::draw(sf::RenderWindow * window){
 	}
 	cue.draw(window);
 	path_to_dir_field.draw(window);
+	file_list.draw(window);
 }
 
 void Step_Matrix::update(Event_Handler * event_h){
+	update_text_fields(event_h);
+	update_choice_fields(event_h);
+	update_slots(event_h);
+	
+	update_cue();
+}
+
+void Step_Matrix::update_text_fields(Event_Handler * event_h){
 	if(path_to_dir_field.has_focus()){
 		path_to_dir_field.text_append(event_h->get_ch());
 		path_to_dir_field.text_remove(event_h->pollSp('B'));
@@ -45,8 +59,23 @@ void Step_Matrix::update(Event_Handler * event_h){
 	if(Base_System_Entry::no_target(event_h->pollMp('x'), event_h->pollMp('y'), event_h->pollMb('l'))){ 
 		Base_System_Entry::deactivate_all();
 	}
+}
+void Step_Matrix::update_choice_fields(Event_Handler * event_h){
+	int s = (int)event_h->get_ch()-48;
+	int a = file_list.check(event_h->pollMp('x'), event_h->pollMp('y'), event_h->pollMb('l'));
+	if (a != -1 and s >= 0 and s < 32){ 
+		std::cout << a << " and " << s << '\n';
+		sound_h.load_sound(s, file_list.get_file_name(a));
+	}
 	
-	
+}
+
+void Step_Matrix::update_cue(){
+	if(cue.update()){
+		if(slot[cue.get_pos()].is_active()) slot[cue.get_pos()].play();
+	}
+}
+void Step_Matrix::update_slots(Event_Handler * event_h){
 	if(event_h->poll_once_ch('q')) slot[0].switch_state();
 	if(event_h->poll_once_ch('w')) slot[1].switch_state();
 	if(event_h->poll_once_ch('e')) slot[2].switch_state();
@@ -64,8 +93,4 @@ void Step_Matrix::update(Event_Handler * event_h){
 	if(event_h->poll_once_ch('h')) slot[13].switch_state();
 	if(event_h->poll_once_ch('j')) slot[14].switch_state();
 	if(event_h->poll_once_ch('k')) slot[15].switch_state();
-	
-	if(cue.update()){
-		if(slot[cue.get_pos()].is_active()) slot[cue.get_pos()].play();
-	}
 }

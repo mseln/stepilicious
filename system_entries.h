@@ -10,7 +10,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
-
+#define INF 1000000000
 class Base_System_Entry{
 private:
 	static int items;
@@ -19,7 +19,10 @@ private:
 protected:
 	int pos[2];
 	int size[2];
-	int col[4];
+	
+	int active_col[4];
+	int nonactive_col[4];
+	int text_col[3];
 	
 	bool is_down;
 	bool activated;
@@ -31,8 +34,12 @@ public:
 	
 	void set_pos(int x, int y);
 	void set_size(int x, int y);
-	void set_col(int r, int g, int b);
-	void set_col(int r, int g, int b, int a);
+	
+	void set_active_col(int r, int g, int b);
+	void set_active_col(int r, int g, int b, int a);
+	void set_nonactive_col(int r, int g, int b);
+	void set_nonactive_col(int r, int g, int b, int a);
+	void set_text_col(int r, int g, int b);
 	
 	void activate(){activated = true;}
 	void deactivate(){activated = false;};
@@ -50,4 +57,18 @@ public:
 	void text_remove(bool r);
 	
 	void draw(sf::RenderWindow * window);
+};
+
+class Choice_Field : public Base_System_Entry{
+private:
+	std::vector<std::string> files;
+	int active_field;
+	int is_down;
+	
+public:
+	Choice_Field();
+	void init(std::vector<std::string> f_list);
+	void draw(sf::RenderWindow * window);
+	int  check(int x, int y, bool l_mouse_key);
+	std::string get_file_name(int n);
 };

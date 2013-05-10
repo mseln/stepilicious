@@ -13,17 +13,22 @@ void Sound_Handler::load_dir(std::string path){
 	DIR *dir = opendir(path.c_str()); // open the current directory
 	if (!dir){
 		std::cerr << "Cannot open directory!" << std::endl;
-		exit(1);
+		return;
 	}
 	
 		struct dirent *entry;
 	while (entry = readdir(dir)){ // notice the single '='
-		std::cout << "Found directory entry: "
-		<< entry->d_name << std::endl;
+		//std::cout << "Found directory entry: "
+		//<< entry->d_name << std::endl;
 		f_name_in_path.push_back(entry->d_name);
 	}
-		closedir(dir);
+	closedir(dir);
 }
+
+std::vector<std::string> Sound_Handler::get_file_names(){
+	return f_name_in_path;
+}
+
 
 bool Sound_Handler::load_sound(int n, std::string f_name){
 	if(!sound_buffer[n].sound.OpenFromFile(f_name)){
