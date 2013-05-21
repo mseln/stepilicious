@@ -17,7 +17,7 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 
-class Button{
+class Menu_Button{
 private:
 	int pos[2];
 	int size[2];
@@ -42,8 +42,8 @@ public:
 
 class Menu{
 private:
-	Button start_b;
-	Button quit_b;
+	Menu_Button start_b;
+	Menu_Button quit_b;
 	
 public:
 	Menu();
@@ -55,8 +55,8 @@ public:
 
 class InGame_Menu{
 private:
-	Button back_b;
-	Button exit_b;
+	Menu_Button back_b;
+	Menu_Button exit_b;
 	
 public:
 	InGame_Menu();

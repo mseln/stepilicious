@@ -26,6 +26,7 @@
 class Step_Matrix{
 private:
 	Slot slot[N_SLOTS];
+	Button mute_horiz[4];
 	Cue cue;
 	
 	Text_Field path_to_dir_field;

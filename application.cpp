@@ -3,7 +3,7 @@
 #include "application.h"
 
 Application::Application(){
-	window = new sf::RenderWindow(sf::VideoMode(1200, 800), "Stepilicious");
+	window = new sf::RenderWindow(sf::VideoMode(1280, 800), "Stepilicious");
 	window->SetFramerateLimit(60);
 	
 	event_h = new Event_Handler(window);

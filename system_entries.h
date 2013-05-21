@@ -24,6 +24,7 @@ protected:
 	int nonactive_col[4];
 	int text_col[3];
 	
+	bool multi_active;
 	bool is_down;
 	bool activated;
 public:	
@@ -41,6 +42,7 @@ public:
 	void set_nonactive_col(int r, int g, int b, int a);
 	void set_text_col(int r, int g, int b);
 	
+	void switch_state(){activated = !activated;}
 	void activate(){activated = true;}
 	void deactivate(){activated = false;};
 	
@@ -48,10 +50,28 @@ public:
 	bool check(int x, int y, bool l_mouse_key);
 };
 
+class Button : public Base_System_Entry{
+private:
+	static sf::Image button_img;
+	bool m_is_down;
+	
+public:
+	static bool init();
+	
+	Button();
+	
+	void text_append(char c);
+	void text_remove(bool r);
+	
+	bool check(int x, int y, bool l_mouse_key);
+	bool poll();
+
+	void draw(sf::RenderWindow * window);	
+};
+
 class Text_Field : public Base_System_Entry{
 private:
 	std::string text;
-	
 public:
 	void text_append(char c);
 	void text_remove(bool r);

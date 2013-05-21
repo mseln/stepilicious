@@ -46,6 +46,9 @@ void Slot::set_color(int r, int g, int b){
 void Slot::set_pos(int x, int y) {
 	pos[0] = x; pos[1] = y;
 }
+void Slot::set_active_sample(int n){
+	active_sample = n;
+}
 
 void Slot::switch_state(){
 	active = !active;
@@ -62,8 +65,12 @@ void Slot::switch_state(){
 }
 void Slot::disable(int n){
 }
+
+void Slot::mute(){muted = true;}
+void Slot::unmute(){muted = false;}
+
 void Slot::play(){
-	sound_list->play(0);
+	if(!muted) sound_list->play(active_sample);
 }
 
 void Slot::draw(sf::RenderWindow * window){

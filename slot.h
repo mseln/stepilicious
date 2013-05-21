@@ -22,6 +22,8 @@ private:
 	int col[3];
 	
 	bool active;
+	bool muted;
+	int  active_sample;
 	
 	static sf::Image button_img;
 	static double pitch;
@@ -37,10 +39,14 @@ public:
 	
 	void set_color(int r, int g, int b);
 	void set_pos(int x, int y);
+	void set_active_sample(int n);
 	
 	void switch_state();
 	void disable(int n);
 	void play();
+	
+	void mute();
+	void unmute();
 	
 	void draw(sf::RenderWindow * window);
 };

@@ -21,7 +21,7 @@ Cue::Cue(){
 		img_col[i][1] = 100;
 		img_col[i][2] = 100;
 		
-		img_pos[i][0] = i * 70 + 50;
+		img_pos[i][0] = i * 70 + 100;
 		img_pos[i][1] = 380;
 	}
 }

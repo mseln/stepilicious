@@ -16,6 +16,7 @@ Base_System_Entry::Base_System_Entry(){
 	items++;
 	adress_list.push_back(this);
 	
+	multi_active = false;
 	activated = false;
 	
 	this->set_active_col(120, 120, 120, 200);
@@ -24,16 +25,16 @@ Base_System_Entry::Base_System_Entry(){
 }
 
 void Base_System_Entry::deactivate_all(){
-	for (int i = 0; i < items; i++) adress_list[i]->deactivate();
+	for (int i = 0; i < items; i++) if(!adress_list[i]->multi_active) adress_list[i]->deactivate();
 }
 
 bool Base_System_Entry::no_target(int x, int y, bool l_mouse_key){
 	if (!l_mouse_key) return false;
 	for (int i = 0; i < items; i++){
 		if(x > adress_list[i]->pos[0] and 
-		   y > adress_list[i]->pos[1] and 
-		   x < adress_list[i]->pos[0]+adress_list[i]->size[0] and 
-		   y < adress_list[i]->pos[1]+adress_list[i]->size[1]){
+			y > adress_list[i]->pos[1] and 
+			x < adress_list[i]->pos[0]+adress_list[i]->size[0] and 
+			y < adress_list[i]->pos[1]+adress_list[i]->size[1]){
 			return false;
 		}
 	}
@@ -188,3 +189,44 @@ int  Choice_Field::check(int x, int y, bool l_mouse_key){
 std::string Choice_Field::get_file_name(int n){
 	return files[n];
 }
+
+
+sf::Image Button::button_img;
+bool Button::init(){
+	if (!button_img.LoadFromFile("button.jpg")){
+		std::cerr << "Couldn't load button image!";
+		return false;
+	}
+	std::cerr << "Succesfully loaded image!\n";
+	return true;
+}
+Button::Button(){
+	multi_active = true;
+	this->set_active_col(200, 100, 100, 200);
+	this->set_nonactive_col(100, 100, 100, 200);
+}
+
+void Button::draw(sf::RenderWindow * window){
+	sf::Sprite tmp_img(button_img);
+	tmp_img.SetPosition(pos[0], pos[1]);
+	if(activated) tmp_img.SetColor(sf::Color(active_col[0], active_col[1], active_col[2], active_col[3]));
+	else		  tmp_img.SetColor(sf::Color(nonactive_col[0], nonactive_col[1], nonactive_col[2], nonactive_col[3]));
+	window->Draw(tmp_img);
+}
+bool Button::check(int x, int y, bool l_mouse_key){
+	std::cout << m_is_down << ' ' << l_mouse_key << '\t' << x << ' ' << y << '\n';
+	std::cout << pos[0] << ' ' << pos[0]+size[0] << ' ' << pos[1] << ' ' << pos[1]+size[1] << '\n';
+	if(x > pos[0] and 
+	   y > pos[1] and 
+	   x < pos[0]+size[0] and 
+	   y < pos[1]+size[1] and 
+	   l_mouse_key and 
+	   !m_is_down){
+		m_is_down = l_mouse_key;
+		return true;
+	}
+	m_is_down = l_mouse_key;
+	
+	return false;
+}
+bool Button::poll(){return activated;}

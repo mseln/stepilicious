@@ -9,9 +9,9 @@
 
 #include "menu.h"
 
-//*************************** -- Button -- ************************************
+//*************************** -- Menu_Button -- ************************************
 
-void Button::init(){
+void Menu_Button::init(){
 	button = sf::Shape::Rectangle(pos[0], pos[1], pos[0]+size[0], pos[1]+size[1], sf::Color(col[0], col[1], col[2], 200));
 	text.SetPosition(pos[0]+20, pos[1]-5);
 	text.Move(text.GetCenter());
@@ -20,7 +20,7 @@ void Button::init(){
 	is_down = false;
 }
 
-bool Button::check(int x, int y, bool l_mouse_key){
+bool Menu_Button::check(int x, int y, bool l_mouse_key){
 	if(x > pos[0] and y > pos[1] and x < pos[0]+size[0] and y < pos[1]+size[1] and l_mouse_key){
 		this->set_col(255, 200, 100); 
 		this->init();
